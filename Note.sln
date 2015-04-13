@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Note", "Note\Note.csproj", "{EA6EEE52-B39E-45F3-B4B5-B2F12E620DB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA6EEE52-B39E-45F3-B4B5-B2F12E620DB4}.Debug|x86.ActiveCfg = Debug|x86
+		{EA6EEE52-B39E-45F3-B4B5-B2F12E620DB4}.Debug|x86.Build.0 = Debug|x86
+		{EA6EEE52-B39E-45F3-B4B5-B2F12E620DB4}.Release|x86.ActiveCfg = Release|x86
+		{EA6EEE52-B39E-45F3-B4B5-B2F12E620DB4}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Note\Note.csproj
+	EndGlobalSection
+EndGlobal
