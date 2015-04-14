@@ -40,7 +40,7 @@ namespace Note
 
 						Terminal.PrintLn ();
 
-						foreach ( var index in lines ) {
+						foreach (var index in lines) {
 
 							if (index != "") {
 
@@ -53,7 +53,7 @@ namespace Note
 
 								string roman_number = Numerics.Roman (i);
 								string note = Justify.Left (index, 40);
-								string spacing = Utilities.Repeat (" ",roman_number.Length + 3);
+								string spacing = Utilities.Repeat (" ", roman_number.Length + 3);
 								note = Utilities.Perpend (note, spacing + " ");
 								note = Utilities.RemoveFromStart (note, spacing);
 								note = " " + roman_number.ToString () + " →" + note;
@@ -70,91 +70,30 @@ namespace Note
 
 				}
 
-			//
-			// COMMANDS WITH ONE ARG
-			//
+				//
+				// COMMANDS WITH ONE ARG
+				//
 
-			} else if (args.Length == 1) {
+			} else if (args.Length >= 1) {
 
-				if (args[0] == "add") {
-				
-					try {
-						using (var reader = new StreamReader(note_file_address)) {
-
-							string note_file_string = reader.ReadToEnd ();
-
-							reader.Close ();
-
-							try {
-
-								using (var writer = new StreamWriter (note_file_address)) {
-								
-									note_file_string += "\n" + Terminal.Input ();
-									writer.Write (note_file_string);
-
-								}
-									
-							} catch  {
-								Terminal.PrintLn ("Writing to the note stream failed.");
-							}
-						}
-					} catch{
-						Terminal.PrintLn ("Loading the note file stream failed.");
-					}
-						
-				
-				} else if (args[0] == "reset" ) {
-
-					try {
-						using (var writer = new StreamWriter (note_file_address)) {
-							writer.Write ("");
-						}
-					} catch {
-						Terminal.PrintLn ("Writing to the note stream failed.");
-					}
-
-
-				} else if (args[0] == "help") {
+				if (args[0] == "help") {
 
 					Terminal.PrintLn ();
 					Terminal.PrintLn ("  Kary Note - Copyright 2015 Pouya Kary <k@arendelle.org>");
 					Terminal.PrintLn ("  ───────────────────────────────────────────────────────────");
-					Terminal.PrintLn ("   % note              Prints the notes on the Terminal");
-					Terminal.PrintLn ("   % note add          Let's you append a note");
-					Terminal.PrintLn ("   % note reset        Removes all the notes");
-					Terminal.PrintLn ("   % note rm [index]   Removes the note at [index]");
+					Terminal.PrintLn ("    % note              Prints the notes on the Terminal");
+					Terminal.PrintLn ("    % note [note]       Let's you append a note");
+					// Terminal.PrintLn ("    % note reset        Removes all the notes");
+					Terminal.PrintLn ("    % note rm [index]   Removes the note at [index]");
 					Terminal.PrintLn ();
 					Terminal.PrintLn ("  This is a tiny software released under GNU GPL 3. To get");
 					Terminal.PrintLn ("  more information you may consult the webpage at:");
 					Terminal.PrintLn ();
 					Terminal.PrintLn ("  - http://github.com/pmkary/note");
 					Terminal.PrintLn ();
-				}
- 
-			} else if (args.Length == 2) {
-
-				if (args[0] == "rm") {
 				
-					//
-					// PARSING THE NUMBER TO BE REMOVED
-					//
-
-					int rm_arg = 0;
-
-					try {
-
-						rm_arg = int.Parse (args[1]);
-
-					} catch  {
-						Terminal.PrintLn ("Bad note rm number. It must be a simple integer");
-					}
-
-
-					//
-					// TAKING CARE OF THE REST
-					//
-
-					string new_string = "";
+				} else if (args[0] == "rm") {
+				
 					string full_string = "";
 
 					try {
@@ -171,15 +110,11 @@ namespace Note
 					var string_parts = full_string.Split ('\n');
 
 
-
-					if (string_parts.Length <= rm_arg || rm_arg < 0 ) {
-
-						Terminal.PrintLn ("Out of range index");
-						Environment.Exit (2);
-
-					}
-
-
+					//
+					// WRITING THE INDEXES WITHOUT
+					// WITING THE INDEX WE'RE GOING
+					// TO REMOVE. PRETTY COOL WAY HA?
+					//
 
 					int i = 0;
 
@@ -190,7 +125,20 @@ namespace Note
 							if (index != "") {
 
 								i++;
-								if (i != rm_arg) {
+
+								bool is_not_to_be_removed = true;
+
+								foreach (var arg in args) {
+
+									if (i.ToString () == arg) {
+
+										is_not_to_be_removed = false;
+
+									}
+								}
+
+
+								if (is_not_to_be_removed) {
 
 									writer.WriteLine (index);
 
@@ -202,8 +150,54 @@ namespace Note
 					//
 					// AND WE'RE ALL DONE
 					//
+
+
+
+
+
+				//
+				// NEW NOTE
+				//
+
+				} else {
+
+					try {
+						using (var reader = new StreamReader(note_file_address)) {
+
+							string note_file_string = reader.ReadToEnd ();
+
+							reader.Close ();
+
+							try {
+
+								using (var writer = new StreamWriter (note_file_address)) {
+
+									string new_note = "";
+
+									foreach ( var arg in args ) {
+
+										new_note += arg + " ";
+
+									}
+
+									writer.Write (note_file_string + "\n" + new_note);
+
+								}
+
+							} catch  {
+								Terminal.PrintLn ("Writing to the note stream failed.");
+							}
+						}
+					} catch{
+						Terminal.PrintLn ("Loading the note file stream failed.");
+					}
+
 				}
 			}
 		}
 	}
 }
+
+//
+// DONE
+//

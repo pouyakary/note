@@ -1,6 +1,0 @@
-/Users/pmk/Dropbox/Document/Source Codes/Note/Note/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
-/Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Note.exe.mdb
-/Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Note.exe
-/Users/pmk/Dropbox/Document/Source Codes/Note/Note/obj/x86/Debug/Note.exe
-/Users/pmk/Dropbox/Document/Source Codes/Note/Note/obj/x86/Debug/Note.exe.mdb
-/Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Panther.dll
