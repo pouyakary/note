@@ -4,3 +4,6 @@
 /Users/pmk/Dropbox/Document/Source Codes/Note/Note/obj/x86/Debug/Note.exe
 /Users/pmk/Dropbox/Document/Source Codes/Note/Note/obj/x86/Debug/Note.exe.mdb
 /Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Panther.dll
+/Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Leopard.dll
+/Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Kary.Leopard.dll
+/Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Kary.Foundation.dll

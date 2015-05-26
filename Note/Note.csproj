@@ -30,8 +30,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Panther">
-      <HintPath>..\..\Panther\Panther\bin\Release\Panther.dll</HintPath>
+    <Reference Include="Kary.Foundation">
+      <HintPath>..\..\Leopard\Leopard\obj\Release\Kary.Foundation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -9,8 +9,8 @@
 
 using System;
 using System.IO;
-using Panther;
-using Panther.Text;
+using Kary.Foundation;
+using Kary.Text;
 
 namespace Note
 {
@@ -181,7 +181,6 @@ namespace Note
 									}
 
 									writer.Write (note_file_string + "\n" + new_note);
-
 								}
 
 							} catch  {
