@@ -1,8 +1,8 @@
-﻿<Properties>
+﻿<Properties StartupItem="Note/Note.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Note/Program.cs">
     <Files>
-      <File FileName="Note/Program.cs" Line="13" Column="12" />
+      <File FileName="Note/Program.cs" Line="219" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -7,3 +7,15 @@
 /Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Leopard.dll
 /Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Kary.Leopard.dll
 /Users/pmk/Dropbox/Document/Source Codes/Note/Note/bin/Debug/Kary.Foundation.dll
+/Users/pmk/Dropbox/Codes/Note/Note/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/pmk/Dropbox/Codes/Note/Note/bin/Debug/Note.exe.mdb
+/Users/pmk/Dropbox/Codes/Note/Note/bin/Debug/Note.exe
+/Users/pmk/Dropbox/Codes/Note/Note/obj/x86/Debug/Note.exe
+/Users/pmk/Dropbox/Codes/Note/Note/obj/x86/Debug/Note.exe.mdb
+/Users/pmk/Dropbox/Codes/Note/Note/bin/Debug/Kary.Foundation.dll
+/Users/pmk/Dropbox (Personal)/Codes/Note/Note/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/pmk/Dropbox (Personal)/Codes/Note/Note/bin/Debug/Note.exe.mdb
+/Users/pmk/Dropbox (Personal)/Codes/Note/Note/bin/Debug/Note.exe
+/Users/pmk/Dropbox (Personal)/Codes/Note/Note/obj/x86/Debug/Note.exe
+/Users/pmk/Dropbox (Personal)/Codes/Note/Note/obj/x86/Debug/Note.exe.mdb
+/Users/pmk/Dropbox (Personal)/Codes/Note/Note/bin/Debug/Kary.Foundation.dll

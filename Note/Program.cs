@@ -9,8 +9,8 @@
 
 using System;
 using System.IO;
-using Kary.Foundation;
 using Kary.Text;
+using Kary;
 
 namespace Note
 {
@@ -21,7 +21,7 @@ namespace Note
 
 	class MainClass
 	{
-		static string note_file_address = "/Users/pmk/Dropbox/.notes";
+		static string note_file_address = "/users/pmk/Dropbox (personal)/.KaryAppData/notes.txt";
 
 		public static void Main (string[] args)
 		{
@@ -32,7 +32,6 @@ namespace Note
 			if (args.Length == 0) {
 
 				try {
-
 					using (var reader = new StreamReader (note_file_address)) {
 					
 						var lines = reader.ReadToEnd ().Split ('\n');
@@ -76,38 +75,38 @@ namespace Note
 
 			} else if (args.Length >= 1) {
 
-				if (args[0] == "help") {
+				if ( args[ 0 ] == "help" ) {
 
-					Terminal.PrintLn ();
-					Terminal.PrintLn ("  Kary Note - Copyright 2015 Pouya Kary <k@arendelle.org>");
-					Terminal.PrintLn ("  ───────────────────────────────────────────────────────────");
-					Terminal.PrintLn ("    % note              Prints the notes on the Terminal");
-					Terminal.PrintLn ("    % note [note]       Let's you append a note");
+					Terminal.PrintLn( );
+					Terminal.PrintLn( "  Kary Note - Copyright 2015 Pouya Kary <k@arendelle.org>" );
+					Terminal.PrintLn( "  ───────────────────────────────────────────────────────────" );
+					Terminal.PrintLn( "    % note              Prints the notes on the Terminal" );
+					Terminal.PrintLn( "    % note [note]       Let's you append a note" );
 					// Terminal.PrintLn ("    % note reset        Removes all the notes");
-					Terminal.PrintLn ("    % note rm [index]   Removes the note at [index]");
-					Terminal.PrintLn ();
-					Terminal.PrintLn ("  This is a tiny software released under GNU GPL 3. To get");
-					Terminal.PrintLn ("  more information you may consult the webpage at:");
-					Terminal.PrintLn ();
-					Terminal.PrintLn ("  - http://github.com/pmkary/note");
-					Terminal.PrintLn ();
+					Terminal.PrintLn( "    % note rm [index]   Removes the note at [index]" );
+					Terminal.PrintLn( );
+					Terminal.PrintLn( "  This is a tiny software released under GNU GPL 3. To get" );
+					Terminal.PrintLn( "  more information you may consult the webpage at:" );
+					Terminal.PrintLn( );
+					Terminal.PrintLn( "  - http://github.com/pmkary/note" );
+					Terminal.PrintLn( );
 				
-				} else if (args[0] == "rm") {
+				} else if ( args[ 0 ] == "rm" ) {
 				
 					string full_string = "";
 
 					try {
-						using (var reader = new StreamReader (note_file_address)) {
+						using ( var reader = new StreamReader( note_file_address ) ) {
 				
-							full_string = reader.ReadToEnd ();
+							full_string = reader.ReadToEnd( );
 
 						}
 					} catch {
-						Terminal.PrintLn ("Loading the note failed");
-						Environment.Exit (1);
+						Terminal.PrintLn( "Loading the note failed" );
+						Environment.Exit( 1 );
 					}
 
-					var string_parts = full_string.Split ('\n');
+					var string_parts = full_string.Split( '\n' );
 
 
 					//
@@ -118,19 +117,19 @@ namespace Note
 
 					int i = 0;
 
-					using (var writer = new StreamWriter (note_file_address)) {
+					using ( var writer = new StreamWriter( note_file_address ) ) {
 
-						foreach (var index in string_parts) {
+						foreach ( var index in string_parts ) {
 
-							if (index != "") {
+							if ( index != "" ) {
 
 								i++;
 
 								bool is_not_to_be_removed = true;
 
-								foreach (var arg in args) {
+								foreach ( var arg in args ) {
 
-									if (i.ToString () == arg) {
+									if ( i.ToString( ) == arg ) {
 
 										is_not_to_be_removed = false;
 
@@ -138,9 +137,9 @@ namespace Note
 								}
 
 
-								if (is_not_to_be_removed) {
+								if ( is_not_to_be_removed ) {
 
-									writer.WriteLine (index);
+									writer.WriteLine( index );
 
 								}
 							}
@@ -150,6 +149,93 @@ namespace Note
 					//
 					// AND WE'RE ALL DONE
 					//
+
+
+
+
+
+				
+				//
+				// ADD NOTE
+				//
+
+				} else if ( args[ 0 ] == "add" ) {
+
+					//
+					// INTERFACE
+					//
+
+
+					// the main box
+
+					Terminal.PrintLn(
+					
+						Kary.Text.TextShapes.Box( "NEW NOTE" , Terminal.Width - 6 , 1 , 0 , TextJustification.Left )
+					
+					);
+
+
+					// the extra box lines
+
+					Terminal.X = 11;
+
+					Terminal.Y -= 3;
+
+					Terminal.Print( '┬' );
+
+					Terminal.X--;
+
+					Terminal.Y++;
+
+					Terminal.Print( '│' );
+
+					Terminal.X--;
+
+					Terminal.Y++;
+
+					Terminal.Print( '┴' );
+
+
+					// making the input
+
+					Terminal.Y --;
+
+					Terminal.X = 13;
+
+					string new_note = Terminal.TextBox( Terminal.Width - 17 );
+
+					Terminal.Y++;
+
+
+					//
+					// ADDING THE NOTES
+					//
+
+					try {
+						using (var reader = new StreamReader ( note_file_address ) ) {
+
+							string note_file_string = reader.ReadToEnd ();
+
+							reader.Close ();
+
+							try {
+
+								using (var writer = new StreamWriter ( note_file_address ) ) {
+
+									writer.Write (note_file_string + "\n" + new_note);
+
+								}
+
+							} catch  {
+								Terminal.PrintLn ("Writing to the note stream failed.");
+							}
+						}
+
+					} catch{
+						Terminal.PrintLn ("Loading the note file stream failed.");
+					}
+
+
 
 
 
