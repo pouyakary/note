@@ -80,18 +80,23 @@ namespace Note
 					Terminal.PrintLn( );
 					Terminal.PrintLn( "  Kary Note - Copyright 2015 Pouya Kary <k@arendelle.org>" );
 					Terminal.PrintLn( "  ───────────────────────────────────────────────────────────" );
-					Terminal.PrintLn( "    % note              Prints the notes on the Terminal" );
-					Terminal.PrintLn( "    % note [note]       Let's you append a note" );
-					// Terminal.PrintLn ("    % note reset        Removes all the notes");
-					Terminal.PrintLn( "    % note rm [index]   Removes the note at [index]" );
-					Terminal.PrintLn( );
+					Terminal.PrintLn( "    % note              Prints the notes on the Terminal." );
+					Terminal.NewLine();
+					Terminal.PrintLn( "    % note add          Open's a prompt for you to add notes");
+					Terminal.PrintLn( "                        with special characters you can't add");
+					Terminal.PrintLn( "                        in normal mode.");
+					Terminal.NewLine();
+					Terminal.PrintLn( "    % note [note]       Let's you append a note." );
+					Terminal.NewLine();
+					Terminal.PrintLn( "    % note rm [index]   Removes the note at [index]." );
+					Terminal.NewLine();
 					Terminal.PrintLn( "  This is a tiny software released under GNU GPL 3. To get" );
 					Terminal.PrintLn( "  more information you may consult the webpage at:" );
 					Terminal.PrintLn( );
-					Terminal.PrintLn( "  - http://github.com/pmkary/note" );
+					Terminal.PrintLn( "    - http://github.com/pmkary/note" );
 					Terminal.PrintLn( );
 				
-				} else if ( args[ 0 ] == "rm" ) {
+				} else if ( args[ 0 ] == "rm" || args[ 0 ] == "remove" ) {
 				
 					string full_string = "";
 
@@ -159,12 +164,11 @@ namespace Note
 				// ADD NOTE
 				//
 
-				} else if ( args[ 0 ] == "add" ) {
+				} else if ( args[ 0 ] == "add" || args[ 0 ] == "new" ) {
 
 					//
 					// INTERFACE
 					//
-
 
 					// the main box
 
@@ -205,6 +209,7 @@ namespace Note
 					string new_note = Terminal.TextBox( Terminal.Width - 17 );
 
 					Terminal.Y++;
+
 
 
 					//
