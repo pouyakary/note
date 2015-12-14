@@ -159,7 +159,7 @@ sudo mv ./note /bin
 
 Or the local bin (whatever...)
 
-#### 5
+Step 5
 You're all done!
 
 <br><br>
