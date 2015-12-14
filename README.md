@@ -125,7 +125,7 @@ static string note_file_address = "/Users/pmk/something/.notes";
 Now build the note and copy the path of your binary like this:
 
 ```
-/Users/pmk/somewhere/note/note/bin/release/Note.exe
+/somewhere/note/note/bin/release/Note.exe
 ```
 
 #### Step 4
