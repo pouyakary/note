@@ -36,6 +36,23 @@ To add a new note you can simply write your note after the `note command` for ex
 % note hello world
 ```
 
+For the notes that inculde special characters bash may have problem with like `'` you can use the command:
+
+```
+% note add
+```
+
+And then a prompt like this will open:
+
+```
+┌──────────┬─────────────────────────────────────────────────────┐
+│ NEW NOTE │                                                     │
+└──────────┴─────────────────────────────────────────────────────┘
+```
+
+There you can write a note like whatever that is in your mind!
+
+
 Now if we check the notes again we there hello world is here:
 
 ```
