@@ -23,6 +23,8 @@ namespace Note
 	{
 		static string note_file_address = "/users/pmk/Dropbox (personal)/.KaryAppData/notes.txt";
 
+		static string astrisk_with_space = " ✣ ";
+
 
 		public static int max_roman_size ( int max_number ) {
 
@@ -45,6 +47,45 @@ namespace Note
 		}
 
 
+
+		public static void print_footer ( int max_size ) {
+
+			Terminal.PrintLn( 
+			
+				Utilities.Repeat( " " , max_size + 5 ) + "────────────────── ✣ ✣ ✣ ──────────────────"
+			
+			);
+
+		}
+
+
+
+		public static void print_header ( int max_size ) {
+
+			string header_line = "────────────";
+
+			string header = TextShapes.CurlyBracket( "N O T E S" , 11 , 0 , 0 , TextJustification.Center );
+
+			header = Utilities.Concatenate( header_line + astrisk_with_space , header );
+
+			header = Utilities.Concatenate( header , astrisk_with_space + header_line );
+
+			Terminal.PrintLn(
+
+				Utilities.Concatenate(
+			
+					Utilities.Repeat( " " , max_size + 5 ) , header
+
+				)
+			
+			);
+
+			Terminal.NewLine();
+
+		}
+
+
+
 		public static void Main (string[] args)
 		{
 			//
@@ -65,7 +106,7 @@ namespace Note
 
 						Terminal.PrintLn ();
 
-
+						print_header( size );
 
 						foreach (var index in lines) {
 
@@ -80,9 +121,9 @@ namespace Note
 
 								string roman_string = Numerics.Roman( i );
 
-								string roman_number = Utilities.Repeat( " " , size - roman_string.Length + 1 ) + roman_string + " ✣ ";
+								string roman_number = Utilities.Repeat( " " , size - roman_string.Length + 1 ) + roman_string + astrisk_with_space;
 
-								string note = TextShapes.Box( index , 40 , 1 , 0 , TextJustification.Left );
+								string note = TextShapes.Box( index , 41 , 1 , 0 , TextJustification.Left );
 
 								note = Utilities.Concatenate( roman_number , note ) ;
 
@@ -90,6 +131,10 @@ namespace Note
 
 							}
 						}
+
+						Terminal.NewLine();
+
+						print_footer( size );
 
 						Terminal.PrintLn ();
 					}
