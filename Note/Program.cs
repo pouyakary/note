@@ -23,6 +23,28 @@ namespace Note
 	{
 		static string note_file_address = "/users/pmk/Dropbox (personal)/.KaryAppData/notes.txt";
 
+
+		public static int max_roman_size ( int max_number ) {
+
+			int max_size = 0;
+
+			for ( int index = 0 ; index < max_number ; index++ ) {
+
+				string roman_string = Numerics.Roman( index );
+
+				if ( roman_string.Length > max_size ) {
+
+					max_size = roman_string.Length;
+
+				}
+
+			}
+
+			return max_size;
+
+		}
+
+
 		public static void Main (string[] args)
 		{
 			//
@@ -35,9 +57,15 @@ namespace Note
 					using (var reader = new StreamReader (note_file_address)) {
 					
 						var lines = reader.ReadToEnd ().Split ('\n');
+
+						var size = max_roman_size(lines.Length);
+
+
 						int i = 0;
 
 						Terminal.PrintLn ();
+
+
 
 						foreach (var index in lines) {
 
@@ -50,12 +78,13 @@ namespace Note
 								// POWER USER ONE!
 								//
 
-								string roman_number = Numerics.Roman (i);
-								string note = Justify.Left (index, 40);
-								string spacing = Utilities.Repeat (" ", roman_number.Length + 3);
-								note = Utilities.Perpend (note, spacing + " ");
-								note = Utilities.RemoveFromStart (note, spacing);
-								note = " " + roman_number.ToString () + " →" + note;
+								string roman_string = Numerics.Roman( i );
+
+								string roman_number = Utilities.Repeat( " " , size - roman_string.Length + 1 ) + roman_string + " ✤ ";
+
+								string note = TextShapes.Box( index , 40 , 1 , 0 , TextJustification.Left );
+
+								note = Utilities.Concatenate( roman_number , note ) ;
 
 								Terminal.PrintLn (note);
 								Terminal.PrintLn ();
