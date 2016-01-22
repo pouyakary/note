@@ -87,7 +87,7 @@ namespace Note
 								note = Utilities.Concatenate( roman_number , note ) ;
 
 								Terminal.PrintLn (note);
-								Terminal.PrintLn ();
+								//Terminal.PrintLn ();
 							}
 						}
 					}
