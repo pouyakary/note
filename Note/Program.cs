@@ -80,7 +80,7 @@ namespace Note
 
 								string roman_string = Numerics.Roman( i );
 
-								string roman_number = Utilities.Repeat( " " , size - roman_string.Length + 1 ) + roman_string + " ✤ ";
+								string roman_number = Utilities.Repeat( " " , size - roman_string.Length + 1 ) + roman_string + " ✣ ";
 
 								string note = TextShapes.Box( index , 40 , 1 , 0 , TextJustification.Left );
 
