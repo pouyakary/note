@@ -52,7 +52,7 @@ namespace Note
 
 			Terminal.PrintLn( 
 			
-				Utilities.Repeat( " " , max_size + 5 ) + "────────────────── ✣ ✣ ✣ ──────────────────"
+				Utilities.Repeat( " " , max_size + 8 ) + "─────────────── ✣ ✣ ✣ ───────────────"
 			
 			);
 
@@ -62,7 +62,7 @@ namespace Note
 
 		public static void print_header ( int max_size ) {
 
-			string header_line = "────────────";
+			string header_line = "─────────";
 
 			string header = TextShapes.CurlyBracket( "N O T E S" , 11 , 0 , 0 , TextJustification.Center );
 
@@ -74,7 +74,7 @@ namespace Note
 
 				Utilities.Concatenate(
 			
-					Utilities.Repeat( " " , max_size + 5 ) , header
+					Utilities.Repeat( " " , max_size + 8 ) , header
 
 				)
 			
