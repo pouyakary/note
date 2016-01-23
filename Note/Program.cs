@@ -64,7 +64,12 @@ namespace Note
 
 			string header_line = "─────────";
 
-			string header = TextShapes.CurlyBracket( "N O T E S" , 11 , 0 , 0 , TextJustification.Center );
+			string header = TextShapes.ShapeWithOption( 
+				"N O T E S", 
+				11 , 0 , 0 , 
+				TextJustification.Center , 
+				TextShapeFormat.CurlyBracket
+			);
 
 			header = Utilities.Concatenate( header_line + astrisk_with_space , header );
 
