@@ -65,7 +65,7 @@ namespace Note
 			string header_line = "─────────";
 
 			string header = TextShapes.ShapeWithOption( 
-				"N O T E S", 
+				"notes", 
 				11 , 0 , 0 , 
 				TextJustification.Center , 
 				TextShapeFormat.CurlyBracket
