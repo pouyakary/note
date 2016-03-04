@@ -19,3 +19,4 @@
 /Users/pmk/Dropbox (Personal)/Codes/Note/Note/obj/x86/Debug/Note.exe
 /Users/pmk/Dropbox (Personal)/Codes/Note/Note/obj/x86/Debug/Note.exe.mdb
 /Users/pmk/Dropbox (Personal)/Codes/Note/Note/bin/Debug/Kary.Foundation.dll
+/Users/pmk/Dropbox (Personal)/Codes/Note/Note/obj/x86/Debug/.NETFramework,Version=v4.6.1.AssemblyAttribute.cs

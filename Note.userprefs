@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="Note/Note.csproj" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Note/Program.cs">
     <Files>
-      <File FileName="Note/Program.cs" Line="71" Column="33" />
+      <File FileName="Note/Program.cs" Line="17" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
