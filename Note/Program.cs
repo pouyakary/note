@@ -204,17 +204,19 @@ namespace Note
 		
 			public static void PrintHelpPage ( ) {
 				Terminal.PrintLn(																	);
-				Terminal.PrintLn( "  Kary Note - Copyright 2015 Pouya Kary <k@arendelle.org>" 		);
+				Terminal.PrintLn( "  Kary Note - Copyright 2015-2016 Pouya Kary <kary@gnu.org>"		);
 				Terminal.PrintLn( "  ───────────────────────────────────────────────────────────"	);
-				Terminal.PrintLn( "    % note              Prints the notes on the Terminal." 		);
+				Terminal.PrintLn( "    % note                Prints the notes on the Terminal." 	);
 				Terminal.NewLine(																	);
-				Terminal.PrintLn( "    % note add          Open's a prompt for you to add notes"	);
-				Terminal.PrintLn( "                        with special characters you can't add"	);
-				Terminal.PrintLn( "                        in normal mode."							);
+				Terminal.PrintLn( "    % note add            Open's a prompt for you to add notes"	);
+				Terminal.PrintLn( "                          with special characters you can't add"	);
+				Terminal.PrintLn( "                          in normal mode."						);
 				Terminal.NewLine(																	);
-				Terminal.PrintLn( "    % note [note]       Let's you append a note." 				);
+				Terminal.PrintLn( "    % note [note]         Let's you append a note." 				);
 				Terminal.NewLine(																	);
-				Terminal.PrintLn( "    % note rm [index]   Removes the note at [index]." 			);
+				Terminal.PrintLn( "    % note rm [index]     Removes the note at [index]." 			);
+				Terminal.NewLine(																	);
+				Terminal.PrintLn( "    % note edit [index]   Lets you edit note at [index]." 		);
 				Terminal.NewLine(																	);
 				Terminal.PrintLn( "  This is a tiny software released under GNU GPL 3. To get" 		);
 				Terminal.PrintLn( "  more information you may consult the webpage at:"				);
