@@ -365,6 +365,10 @@ namespace Note
 						
 						PrintHelpPage( );
 						
+					} else if ( args[ 0 ] == "edit" ) {
+						
+						Terminal.PrintLn( "Edit command needs the note number" );
+						
 					} else if ( args[ 0 ] == "rm" || args[ 0 ] == "remove" ) {
 						
 						RemoveNotes( args );
