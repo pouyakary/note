@@ -279,14 +279,14 @@ namespace Note
 				//
 				
 					Terminal.PrintLn(
-						Kary.Text.TextShapes.Box( "NEW NOTE" , Terminal.Width - 6 , 1 , 0 , TextJustification.Left )
+						Kary.Text.TextShapes.Box( "NOTE" , Terminal.Width - 5 , 1 , 0 , TextJustification.Left )
 					);
 
 				//
 				// - - extra box lines - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 				//
 				
-					Terminal.X = 11; Terminal.Y -= 3;
+					Terminal.X = 7; Terminal.Y -= 3;
 					Terminal.Print( '┬' );
 					
 					Terminal.X--; Terminal.Y++;
@@ -300,8 +300,8 @@ namespace Note
 				//
 				
 					Terminal.Y --;
-					Terminal.X = 13;
-					string new_note = Terminal.TextBox( Terminal.Width - 17 , load_note_with_text );
+					Terminal.X = 9;
+					string new_note = Terminal.TextBox( Terminal.Width - 12 , load_note_with_text );
 					Terminal.Y++;
 				
 				//
