@@ -21,7 +21,8 @@ namespace Note
 		// ─── CONST STUFF ────────────────────────────────────────────────────────────────────────────────────
 		//
 		
-			static readonly string note_file_address = "/users/pmk/Dropbox (personal)/.KaryAppData/notes.txt";
+			static string note_file_address;
+			static readonly string note_file_address_config_file = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.Personal ), ".notepath" );
 			static readonly string astrisk_with_space = " ✣ ";
 
 		//
@@ -37,6 +38,22 @@ namespace Note
 					}
 				}
 				return max_size;
+			}
+			
+		//
+		// ─── CONFIG FILE LOADER ─────────────────────────────────────────────────────────────────────────────
+		//
+		
+			public static bool LoadPathAddress ( ) {
+				try {
+					using( StreamReader reader = new StreamReader( note_file_address_config_file ) ) {
+						note_file_address = reader.ReadToEnd( ).Trim( );
+					}
+					return true;
+				} catch {
+					Report( "Could not load the config file." );
+					return false;
+				}
 			}
 
 		//
@@ -400,6 +417,19 @@ namespace Note
 		//
 
 			public static void Main ( string[ ] args ) {
+				
+				//
+				// LOADING CONFIG FILE
+				//
+				
+				if ( !LoadPathAddress( ) ) {
+					return;
+				}
+				
+				
+				//
+				// PARSING THE ARGUMENTS
+				//
 
 				if ( args.Length == 0 ) {
 
