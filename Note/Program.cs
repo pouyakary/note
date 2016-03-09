@@ -109,7 +109,7 @@ namespace Note
 						noteString = reader.ReadToEnd( );
 					}
 				} catch {
-					Terminal.PrintLn( "Loading the note failed" );
+					Report( "Loading the note failed" );
 					Environment.Exit( 1 );
 				}
 				return noteString;
@@ -157,7 +157,7 @@ namespace Note
 						Terminal.PrintLn ();
 					}
 				} catch {
-					Terminal.PrintLn ( "Loading the note file stream failed." );
+					Report( "Loading the note file stream failed." );
 				}
 			}
 			
@@ -175,10 +175,10 @@ namespace Note
 						// Storing the notes
 						StoreNoteList( notes );
 					} else {
-						Terminal.PrintLn( "No note with this index found." );
+						Report( "No note with this index found." );
 					}
 				} catch {
-					Terminal.PrintLn( "Index number in not a good shape." );
+					Report( "Index number in not a good shape." );
 				}
 			}
 		
@@ -194,7 +194,7 @@ namespace Note
 						}
 					}
 				} catch {
-					Terminal.PrintLn( "Could not store the notes..." );
+					Report( "Could not store the notes..." );
 				}
 			}
 			
@@ -329,11 +329,11 @@ namespace Note
 								writer.Write ( note_file_string + "\n" + new_note_text );
 							}
 						} catch  {
-							Terminal.PrintLn ( "Writing to the note stream failed." );
+							Report ( "Writing to the note stream failed." );
 						}
 					}
 				} catch {
-					Terminal.PrintLn ( "Loading the note file stream failed." );
+					Report ( "Loading the note file stream failed." );
 				}
 			}
 
@@ -347,6 +347,27 @@ namespace Note
 					note_text += arg + " ";
 				}
 				return note_text;
+			}
+			
+			public static void PrintEditNoArgError ( ) {
+				int countOfNotes = LoadNotes( ).Length;
+				Random rnd = new Random( );
+				Report ( 
+					"Edit command takes one argument to know which note you'd like to edit." +
+					" for now you have " + countOfNotes + " notes. So you can do something like:\n" +
+					"   % note edit " + rnd.Next( countOfNotes ).ToString( )
+				);
+			}
+			
+			public static void Report ( string message ) {
+				Terminal.NewLine();
+				Terminal.Red( );
+				Terminal.PrintLn( "  O P E R A T I O N   F A I L I U R E\n" );
+				Terminal.Reset( );
+				string msg = Justify.Left( message , 50 );
+				msg = Utilities.Perpend( msg , "  │ " );
+				Terminal.PrintLn( msg );
+				Terminal.NewLine( ); 
 			}
 
 		//
@@ -367,7 +388,7 @@ namespace Note
 						
 					} else if ( args[ 0 ] == "edit" ) {
 						
-						Terminal.PrintLn( "Edit command needs the note number" );
+						PrintEditNoArgError( );
 						
 					} else if ( args[ 0 ] == "rm" || args[ 0 ] == "remove" ) {
 						
