@@ -349,6 +349,10 @@ namespace Note
 				return note_text;
 			}
 			
+		//
+		// ─── EDIT COMMAND NO ARG ERROR ──────────────────────────────────────────────────
+		//	
+			
 			public static void PrintEditNoArgError ( ) {
 				int countOfNotes = LoadNotes( ).Length;
 				Random rnd = new Random( );
@@ -358,6 +362,10 @@ namespace Note
 					"   % note edit " + rnd.Next( countOfNotes ).ToString( )
 				);
 			}
+			
+		//
+		// ─── ERROR REPORTER ─────────────────────────────────────────────────────────────
+		//
 			
 			public static void Report ( string message ) {
 				Terminal.NewLine();
