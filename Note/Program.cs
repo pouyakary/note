@@ -363,6 +363,19 @@ namespace Note
 				);
 			}
 			
+			public static void PrintRemoveNoArgError ( ) {
+				int countOfNotes = LoadNotes( ).Length;
+				Random rnd = new Random( );
+				Report ( 
+					"Remove command takes one or more argument to know which note you'd like to remove." +
+					" for now you have " + countOfNotes + " notes. So you can do something like:\n" +
+					"   % note rm " + rnd.Next( countOfNotes ).ToString( ) + "\n" + 
+					"Or you may remove more than one note like:\n" + 
+					"   % note rm " + rnd.Next( countOfNotes ).ToString( ) + " " + 
+					rnd.Next( countOfNotes ).ToString( ) + " " + rnd.Next( countOfNotes ).ToString( )
+				);
+			}
+			
 		//
 		// ─── ERROR REPORTER ─────────────────────────────────────────────────────────────
 		//
@@ -400,8 +413,12 @@ namespace Note
 						
 					} else if ( args[ 0 ] == "rm" || args[ 0 ] == "remove" ) {
 						
-						RemoveNotes( args );
-
+						if ( args.Length == 1 ) {
+							PrintRemoveNoArgError( );
+						} else {
+							RemoveNotes( args );
+						}
+						
 					} else if ( args[ 0 ] == "add" || args[ 0 ] == "new" ) {
 
 						StoreNewNote( GetNoteFromInterface( ) );
