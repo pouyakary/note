@@ -411,7 +411,7 @@ namespace Note
 						
 						PrintHelpPage( );
 						
-					} else if ( args[ 0 ] == "edit" ) {
+					} else if ( args[ 0 ] == "edit" && args.Length == 1 ) {
 						
 						PrintEditNoArgError( );
 						
