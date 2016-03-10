@@ -184,7 +184,7 @@ namespace Note
 			
 			public static void EditNoteAtIndex ( string indexString ) {
 				try {
-					int index = int.Parse( indexString );
+					int index = int.Parse( indexString ) - 1;
 					string[ ] notes = LoadNotes( );
 					if ( index > -1 && index < notes.Length ) {
 						// Getting and updating the new note
