@@ -176,7 +176,19 @@ namespace Note
 		//
 		
 			public static int GetColumnSplitLocation ( string[ ] column_list ) {
-				return ( int ) Math.Floor( ( double ) column_list.Length / 2 );
+				int size = CountLines( string.Join( "\n" , column_list ) ) / 2 ;
+				int split_index = 0;
+				int total_length = 0;
+				for ( int index = 0; index < column_list.Length ; index++ ) {
+					if ( total_length > size ) {
+						split_index = index - 1;
+						goto finish;
+					} else {
+						total_length += CountLines( column_list[ index ] ) + 1;
+					}
+				}
+				finish:
+				return split_index;
 			}
 			
 		//
@@ -204,6 +216,9 @@ namespace Note
 				} else {
 					left += append_string;
 				}
+				int h = CountLines( left );
+				left = Utilities.PlaceAtBox( _column_size + 6 , h , left );
+				right = Utilities.PlaceAtBox( _column_size , h , right );
 			}
 			
 		//
@@ -227,7 +242,7 @@ namespace Note
 				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
 				   int difference = CountLines( left_column ) - CountLines( right_column );
 				 float difference_ratio = ( Math.Abs( difference ) / CountLines( column_list[ split_location ] ) );
-				if ( difference_ratio > 1.8 ) {
+				if ( difference_ratio > 1.4 ) {
 					if ( difference > 0 ) {
 						split_location--;
 					} else {
@@ -243,7 +258,7 @@ namespace Note
 			public static void printNoteColumn ( string[ ] notes ) {
 				string[ ] column_list = GenerateBoxArray( notes );
 				int split_location = GetColumnSplitLocation( column_list );
-				AdjustSplitLocation( column_list , ref split_location );
+				// AdjustSplitLocation( column_list , ref split_location );
 				
 				string left_column = generateStringColumn( column_list , 0 , split_location );
 				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
@@ -529,39 +544,24 @@ namespace Note
 				//
 
 				if ( args.Length == 0 ) {
-
 					PrintNote( );
-
 				} else if ( args.Length >= 1 ) {
-					
 					if ( args[ 0 ] == "help" ) {
-						
 						PrintHelpPage( );
-						
 					} else if ( args[ 0 ] == "edit" && args.Length == 1 ) {
-						
 						PrintEditNoArgError( );
-						
 					} else if ( args[ 0 ] == "rm" || args[ 0 ] == "remove" ) {
-						
 						if ( args.Length == 1 ) {
 							PrintRemoveNoArgError( );
 						} else {
 							RemoveNotes( args );
 						}
-						
 					} else if ( args[ 0 ] == "add" || args[ 0 ] == "new" ) {
-
 						StoreNewNote( GetNoteFromInterface( ) );
-						
 					} else if ( args.Length == 2 && args[ 0 ] == "edit" ) {
-						
 						EditNoteAtIndex( args[ 1 ] );
-						
 					} else {
-						
 						StoreNewNote( GetNewNoteFromArgs( args ) );
-					
 					}
 				}
 			}
