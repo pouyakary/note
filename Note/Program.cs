@@ -25,7 +25,6 @@ namespace Note
 			static string note_file_address;
 			static readonly string note_file_address_config_file = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.Personal ), ".notepath" );
 			static readonly string astrisk_with_space = " ✣ ";
-			
 			static readonly int _column_size = 31;
 			static readonly int _left_margin = 3;
 			
@@ -208,16 +207,50 @@ namespace Note
 			}
 			
 		//
+		// ─── COMPUTE COLUMN HEIGHT ──────────────────────────────────────────────────────────────────────────
+		//
+		
+			public static int ComputeColumnBoxHeightViaTheMainColumn ( string[ ] column_boxes , int start , int end ) {
+				int column_height = 0;
+				for ( int index = start; index < end && index < column_boxes.Length; index++ ) {
+					column_height += CountLines( column_boxes[ index ] );
+				}
+				return column_height;
+			}
+			
+		//
+		// ─── ADJUST SPLIT LOCATION ──────────────────────────────────────────────────────────────────────────
+		//
+		
+			public static void AdjustSplitLocation ( string[ ] column_list , ref int split_location ) {
+				string left_column = generateStringColumn( column_list , 0 , split_location );
+				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
+				   int difference = CountLines( left_column ) - CountLines( right_column );
+				 float difference_ratio = ( Math.Abs( difference ) / CountLines( column_list[ split_location ] ) );
+				if ( difference_ratio > 1.8 ) {
+					if ( difference > 0 ) {
+						split_location--;
+					} else {
+						split_location++;
+					}
+				}
+			}
+			
+		//
 		// ─── PRINT NOTES ────────────────────────────────────────────────────────────────────────────────────
 		//
 			
 			public static void printNoteColumn ( string[ ] notes ) {
 				string[ ] column_list = GenerateBoxArray( notes );
 				int split_location = GetColumnSplitLocation( column_list );
+				AdjustSplitLocation( column_list , ref split_location );
+				
 				string left_column = generateStringColumn( column_list , 0 , split_location );
 				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
 				FixColumnSizes( ref left_column , ref right_column );
+				
 				string layout = Utilities.Concatenate ( left_column , right_column );
+				
 				Terminal.Print( layout );
 			}
 			
