@@ -61,6 +61,7 @@ namespace Note
 
 			public static void print_footer ( ) {
 				Terminal.NewLine();
+				Terminal.Y--;
 				//Terminal.PrintLn( Utilities.Repeat( "─" , Terminal.Width - 12 ) + " © 2016 ────" );
 			}	
 		
