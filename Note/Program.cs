@@ -24,21 +24,9 @@ namespace Note
 			static string note_file_address;
 			static readonly string note_file_address_config_file = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.Personal ), ".notepath" );
 			static readonly string astrisk_with_space = " ✣ ";
-
-		//
-		// ─── COMPUTE MAX ROMAN NUMBER SIZE IN RANGE ─────────────────────────────────────────────────────────
-		//
-
-			public static int max_roman_size ( int max_number ) {
-				int max_size = 0;
-				for ( int index = 0 ; index < max_number ; index++ ) {
-					string roman_string = Numerics.Roman( index );
-					if ( roman_string.Length > max_size ) {
-						max_size = roman_string.Length;
-					}
-				}
-				return max_size;
-			}
+			
+			static readonly int _column_size = 41;
+			static readonly int _left_margin = 3;
 			
 		//
 		// ─── CONFIG FILE LOADER ─────────────────────────────────────────────────────────────────────────────
@@ -60,9 +48,9 @@ namespace Note
 		// ─── PRINT FOOTER ───────────────────────────────────────────────────────────────────────────────────
 		//
 
-			public static void print_footer ( int max_size ) {
+			public static void print_footer ( ) {
 				Terminal.PrintLn( 
-					Utilities.Repeat( " " , max_size + 8 ) + "─────────────── ✣ ✣ ✣ ───────────────"
+					Utilities.Repeat( " " , _left_margin + 4 ) + "─────────────── ✣ ✣ ✣ ───────────────"
 				);
 			}
 
@@ -79,7 +67,7 @@ namespace Note
 			//                 ⎩           ⎭            
 			//
 
-			public static void print_header ( int max_size ) {
+			public static void print_header ( ) {
 				
 				// the "─────────" lines in start and end of the header
 				string header_line = Utilities.Repeat( "─" , 9 );
@@ -88,7 +76,7 @@ namespace Note
 					
 					// adds spacing to the start of the text to match the other boxes
 					Utilities.Concatenate(
-						Utilities.Repeat( " " , max_size + 8 ),
+						Utilities.Repeat( " " , _left_margin + 4 ),
 						
 						// adds an astrisk + line to the end of the result
 						Utilities.Concatenate( 
@@ -139,7 +127,61 @@ namespace Note
 			public static string[ ] LoadNotes ( ) {
 				return LoadNoteString( ).Split( '\n' );
 			}
+			
+		//
+		// ─── GENERATE NOTE BOX ──────────────────────────────────────────────────────────────────────────────
+		//
+		
+			public static string GenerateNoteBox ( string note , int index ) {
+				
+				// init commands 
+				string index_string = Kary.Text.Numerics.Roman( index );
+				string replacer_placeholder_string = Utilities.Repeat( "%" , index_string.Length + 3 );
+				int replacer_placeholder_string_lenght = replacer_placeholder_string.Length;
+				
+				// adding the replacer_placeholder_string
+				string note_string = replacer_placeholder_string + note;
+				note_string = Justify.Left( note_string , _column_size );
+				
+				// checking if there is a second line
+				string[ ] lines = note_string.Split( '\n' );
+				if ( lines.Length != 1 ) {
+					// adjusting
+					lines[ 1 ] = replacer_placeholder_string + lines[ 1 ];
+					note_string = string.Join( " " , lines );
+				} else {
+					note_string.Replace( replacer_placeholder_string , index_string + "│ " );
+				}
+				
+				note_string = Kary.Text.TextShapes.Box( note_string , _column_size , 1 , 0 , TextJustification.Left );
+				lines = note_string.Split( '\n' );
+				
+				// adjusting the boom
+				string bottom_line = lines[ 2 ];
+				if ( lines.Length == 3 ) {
+					bottom_line = Utilities.RemoveFromStart( lines[ 2 ] , "└" + Utilities.Repeat( "─" , replacer_placeholder_string_lenght ) );
+					bottom_line = "└" + Utilities.Repeat( "─" , replacer_placeholder_string_lenght - 1 ) + "┴" + bottom_line;
+				} else {
+					bottom_line = Utilities.RemoveFromStart( lines[ 2 ] , "│ " + replacer_placeholder_string );
+					bottom_line = "├" + Utilities.Repeat( "─" , replacer_placeholder_string_lenght - 1 ) + "┘ " + bottom_line;
+				}
+				
+				lines[ 2 ] = bottom_line;
+				
+				// fix first line
+				lines[ 0 ] = Utilities.RemoveFromStart( lines[ 0 ] , "┌" + Utilities.Repeat( "─" , replacer_placeholder_string_lenght ) );
+				lines[ 0 ] = "┌" + Utilities.Repeat( "─" , replacer_placeholder_string_lenght - 1 ) + "┬" + lines[ 0 ];
+				
+				// fix substitution
+				lines[ 1 ] = lines[ 1 ].Replace( replacer_placeholder_string , index_string + " │ " );
 
+				// finishing
+				note_string = string.Join( "\n" , lines );
+				note_string = Utilities.Concatenate( "   " , note_string );
+				
+				return note_string;
+			}
+			
 		//
 		// ─── PRINT THE NOTE ─────────────────────────────────────────────────────────────────────────────────
 		//
@@ -150,27 +192,21 @@ namespace Note
 						
 						// Defs
 						var lines 	= reader.ReadToEnd ().Split ('\n');
-						var size 	= max_roman_size(lines.Length);
 						int index	= 0;
 						
 						// Body
 						Terminal.PrintLn ();
-						print_header( size );
+						print_header( );
 						foreach ( var element in lines ) {
 							if ( element != "" ) {
 								index++;
-
-								// Creating the note box
-								string roman_string = Numerics.Roman( index );
-								string roman_number = Utilities.Repeat( " " , size - roman_string.Length + 1 ) + roman_string + astrisk_with_space;
-								string note = TextShapes.Box( element , 41 , 1 , 0 , TextJustification.Left );
-								note = Utilities.Concatenate( roman_number , note ) ;
 								
+								string note = GenerateNoteBox( element , index );
 								Terminal.PrintLn (note);								
 							}
 						}
 						Terminal.NewLine();
-						print_footer( size );
+						print_footer( );
 						Terminal.PrintLn ();
 					}
 				} catch {
