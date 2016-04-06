@@ -9,6 +9,7 @@
 
 using System;
 using System.IO;
+using System.Collections.Generic;
 using Kary.Text;
 using Kary;
 
@@ -25,7 +26,7 @@ namespace Note
 			static readonly string note_file_address_config_file = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.Personal ), ".notepath" );
 			static readonly string astrisk_with_space = " ✣ ";
 			
-			static readonly int _column_size = 41;
+			static readonly int _column_size = 31;
 			static readonly int _left_margin = 3;
 			
 		//
@@ -135,7 +136,7 @@ namespace Note
 			public static string GenerateNoteBox ( string note , int index ) {
 				
 				// init commands 
-				string index_string = Kary.Text.Numerics.Roman( index );
+				string index_string = index.ToString( ); //Kary.Text.Numerics.Roman( index );
 				string replacer_placeholder_string = Utilities.Repeat( "%" , index_string.Length + 3 );
 				int replacer_placeholder_string_lenght = replacer_placeholder_string.Length;
 				
@@ -183,6 +184,83 @@ namespace Note
 			}
 			
 		//
+		// ─── GENERATE BOX ARRAY ─────────────────────────────────────────────────────────────────────────────
+		//
+			
+			public static string[ ] GenerateBoxArray ( string[ ] notes ) {
+				int index = 0;
+				List<string> boxes = new List<string>( ) ;
+				foreach ( var element in notes ) {
+					if ( element != "" ) {
+						index++;
+						boxes.Add( GenerateNoteBox( element , index ) );							
+					}
+				}
+				return boxes.ToArray( );
+			}
+
+		//
+		// ─── MAKE STRING COLUMN ─────────────────────────────────────────────────────────────────────────────
+		//
+		
+			public static string generateStringColumn ( string[ ] notes , int start , int end ) {
+				string result = "";
+				for ( int index = start; index < notes.Length && index < end ; index++ ) {
+					result += notes[ index ] + "\n";
+				}
+				return result;
+			}
+			
+		//
+		// ─── GENERATE COLUMN SIZE ───────────────────────────────────────────────────────────────────────────
+		//
+		
+			public static int GetColumnSplitLocation ( string[ ] column_list ) {
+				return ( int ) Math.Floor( ( double ) column_list.Length / 2 );
+			}
+			
+		//
+		// ─── COUNT LINES ────────────────────────────────────────────────────────────────────────────────────
+		//
+		
+			public static int CountLines ( string text ) {
+				int lines = 0;
+				foreach ( char character in text ) {
+					if ( character == '\n' )
+						lines++;
+				}
+				return lines;
+			}
+			
+		//
+		// ─── FIX DIFFERENCE ─────────────────────────────────────────────────────────────────────────────────
+		//
+			
+			public static void FixColumnSizes ( ref string left , ref string right ) {
+				int difference = CountLines( left ) - CountLines( right );
+				string append_string = Utilities.Repeat( "\n" , Math.Abs( difference ) + 1 );
+				if ( difference > 0 ) {
+					right += append_string;
+				} else {
+					left += append_string;
+				}
+			}
+			
+		//
+		// ─── PRINT NOTES ────────────────────────────────────────────────────────────────────────────────────
+		//
+			
+			public static void printNoteColumn ( string[ ] notes ) {
+				string[ ] column_list = GenerateBoxArray( notes );
+				int split_location = GetColumnSplitLocation( column_list );
+				string left_column = generateStringColumn( column_list , 0 , split_location );
+				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
+				FixColumnSizes( ref left_column , ref right_column );
+				string layout = Utilities.Concatenate ( left_column , right_column );
+				Terminal.Print( layout );
+			}
+			
+		//
 		// ─── PRINT THE NOTE ─────────────────────────────────────────────────────────────────────────────────
 		//
 
@@ -192,19 +270,13 @@ namespace Note
 						
 						// Defs
 						var lines 	= reader.ReadToEnd ().Split ('\n');
-						int index	= 0;
 						
 						// Body
 						Terminal.PrintLn ();
 						print_header( );
-						foreach ( var element in lines ) {
-							if ( element != "" ) {
-								index++;
-								
-								string note = GenerateNoteBox( element , index );
-								Terminal.PrintLn (note);								
-							}
-						}
+						
+						printNoteColumn( lines );
+						
 						Terminal.NewLine();
 						print_footer( );
 						Terminal.PrintLn ();
