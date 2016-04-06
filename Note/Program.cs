@@ -46,64 +46,25 @@ namespace Note
 			}
 
 		//
+		// ─── PRINT HEADER ───────────────────────────────────────────────────────────────────────────────────
+		//
+
+			public static void print_header ( ) {
+				//Terminal.PrintLn( Utilities.Repeat( "─" , Terminal.Width - 14 ) + "┬────────┬────" );
+				//Terminal.PrintLn( "   N O T E" + Utilities.Repeat( " " , 55 ) + " │  Kary  │" );
+				//Terminal.PrintLn( Utilities.Repeat( " " , 66 ) + "└────────┘\n" );
+				Terminal.NewLine();
+			}
+			
+		//
 		// ─── PRINT FOOTER ───────────────────────────────────────────────────────────────────────────────────
 		//
 
 			public static void print_footer ( ) {
-				Terminal.PrintLn( 
-					Utilities.Repeat( " " , _left_margin + 4 ) + "─────────────── ✣ ✣ ✣ ───────────────"
-				);
-			}
-
-		//
-		// ─── PRINT HEADER ───────────────────────────────────────────────────────────────────────────────────
-		//
-
-			// 
-			// THIS FUNCTION GENERATES THIS HEADER TEXT IN THE
-			// TOP OF THE APPLICATION
-			//
-			//                 ⎧           ⎫            
-            //     ───────── ✣ ⎨   notes   ⎬ ✣ ─────────
-			//                 ⎩           ⎭            
-			//
-
-			public static void print_header ( ) {
-				
-				// the "─────────" lines in start and end of the header
-				string header_line = Utilities.Repeat( "─" , 9 );
-				
-				Terminal.PrintLn(
-					
-					// adds spacing to the start of the text to match the other boxes
-					Utilities.Concatenate(
-						Utilities.Repeat( " " , _left_margin + 4 ),
-						
-						// adds an astrisk + line to the end of the result
-						Utilities.Concatenate( 
-							
-							// adds the line + astrisk + note box together
-							Utilities.Concatenate( 
-								header_line + astrisk_with_space, 
-								
-								// This Generates the curly brackted box with
-								// note text on it.
-								TextShapes.ShapeWithOption( 
-									"notes", 
-									11 , 0 , 0 , 
-									TextJustification.Center , 
-									TextShapeFormat.CurlyBracket
-								) 
-							), 
-							
-							astrisk_with_space + header_line 
-						)
-					)			
-				);
-				
 				Terminal.NewLine();
-			}
-			
+				//Terminal.PrintLn( Utilities.Repeat( "─" , Terminal.Width - 12 ) + " © 2016 ────" );
+			}	
+		
 		//
 		// ─── LOAD NOTE ──────────────────────────────────────────────────────────────────────────────────────
 		//
@@ -272,14 +233,9 @@ namespace Note
 						var lines 	= reader.ReadToEnd ().Split ('\n');
 						
 						// Body
-						Terminal.PrintLn ();
 						print_header( );
-						
 						printNoteColumn( lines );
-						
-						Terminal.NewLine();
 						print_footer( );
-						Terminal.PrintLn ();
 					}
 				} catch {
 					Report( "Loading the note file stream failed." );
@@ -572,7 +528,7 @@ namespace Note
 					} else {
 						
 						StoreNewNote( GetNewNoteFromArgs( args ) );
-						
+					
 					}
 				}
 			}
