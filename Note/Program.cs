@@ -25,7 +25,7 @@ namespace Note
 			static string note_file_address;
 			static readonly string note_file_address_config_file = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.Personal ), ".notepath" );
 			static readonly string astrisk_with_space = " ✣ ";
-			static readonly int _column_size = 31;
+			static readonly int _column_size = ( Terminal.Width - 17 ) / 2;
 			static readonly int _left_margin = 3;
 			
 		//
