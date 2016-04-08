@@ -182,7 +182,7 @@ namespace Note
 				int total_length = 0;
 				for ( int index = 0; index < column_list.Length ; index++ ) {
 					if ( total_length > size ) {
-						split_index = index - 1;
+						split_index = index;
 						goto finish;
 					} else {
 						total_length += CountLines( column_list[ index ] ) + 1;
@@ -242,14 +242,10 @@ namespace Note
 				string left_column = generateStringColumn( column_list , 0 , split_location );
 				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
 				   int difference = CountLines( left_column ) - CountLines( right_column );
-				 float difference_ratio = ( Math.Abs( difference ) / CountLines( column_list[ split_location ] ) );
-				if ( difference_ratio > 1.4 ) {
-					if ( difference > 0 ) {
-						split_location--;
-					} else {
-						split_location++;
-					}
-				}
+				   int last_left_box_height = CountLines( column_list[ split_location - 1 ] );
+				   if ( last_left_box_height < difference ) {
+					   split_location--;
+				   }
 			}
 			
 		//
@@ -259,7 +255,7 @@ namespace Note
 			public static void printNoteColumn ( string[ ] notes ) {
 				string[ ] column_list = GenerateBoxArray( notes );
 				int split_location = GetColumnSplitLocation( column_list );
-				// AdjustSplitLocation( column_list , ref split_location );
+				AdjustSplitLocation( column_list , ref split_location );
 				
 				string left_column = generateStringColumn( column_list , 0 , split_location );
 				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
