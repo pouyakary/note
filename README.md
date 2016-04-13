@@ -1,9 +1,23 @@
 
+![](http://kary.us/GitHubWideImages/note/screen.png) 
+
 # Note
 
-A very simple terminal note tool, I developed for myself but you can benefit from it too. It's designed to work in my computer as the path of the note file is hard-coded to the base of the software. Also you may need to compile a [run.vala](https://github.com/pmkary/run) 
+I have always hated every single note / reminder / whatever application that was around. After writing the [Kary Framework](https://github.com/karyfoundation/framework-base), I started creating a very simple and pretty note software so that I could use for real. This is the result. 
+
+## What is special about note?
+
+- Super easy to work with
+- Very minimal
+- One of the most complicated Kary Framework UI codes in history and really the most complicated Terminal UI layout of all time! (have you noticed the float divs inside it?)
+- Fully cross platform
+- Note uses plain text to store it's notes hence the end result is fully printable and rebate
+- Plain text storage &rightarrow; so that you can put your storage in your Dropbox, iCloud, Google Drive or whatever you have!
+- Fully cross platform! with a cloud synced system you can even have your notes synced all over your devices!
 
 ## How to use it
+
+#### Seeing your notes
 
 After you installed it you can read your notes using `note` command in terminal:
 
@@ -13,22 +27,11 @@ After you installed it you can read your notes using `note` command in terminal:
 
 That will result:
 
+![](http://kary.us/GitHubWideImages/note/screen.png) 
 
-```
-Pouyas-MacBook-Pro:~ pmk$ note
+<br/>
 
- I → AIS 2XII for English class is needed 
-
- II → kary systems website needs work to do 
-
- III → negative index for arrays 
-
- IV → There is a need for a JavaScript
-      infrastructure in Arendelle Adgar
-      engine. Also basic html tools for
-      creating the grid screen 
-
-```
+#### Adding notes
 
 To add a new note you can simply write your note after the `note command` for example adding `hello world` will be:
 
@@ -44,54 +47,33 @@ For the notes that inculde special characters bash may have problem with like `'
 
 And then a prompt like this will open:
 
-```
-┌──────────┬─────────────────────────────────────────────────────┐
-│ NEW NOTE │                                                     │
-└──────────┴─────────────────────────────────────────────────────┘
-```
+![](http://kary.us/GitHubWideImages/note/add.png) 
 
 There you can write a note like whatever that is in your mind!
 
+<br/>
 
-Now if we check the notes again we there hello world is here:
-
-```
-Pouyas-MacBook-Pro:~ pmk$ note
-
- I → AIS 2XII for English class is needed 
-
- II → kary systems website needs work to do 
-
- III → negative index for arrays 
-
- IV → There is a need for a JavaScript
-      infrastructure in Arendelle Adgar
-      engine. Also basic html tools for
-      creating the grid screen 
-
- V → hello world 
-```
-
+#### Removing notes
 To remove the note you can use `note rm` command, For example you want to remove note 2 and 5, You should use the `note rm` this way:
 
 ```
 % note rm 2 5
 ```
 
-And if we run the note again:
+<br/>
+
+#### Editing notes
+Editing notes is just as easy. All you have to do to edit a note is to specify the note index after the `edit` command:
 
 ```
-Pouyas-MacBook-Pro:~ pmk$ note
-
- I → AIS 2XII for English class is needed 
-
- II → negative index for arrays 
-
- III → There is a need for a JavaScript
-       infrastructure in Arendelle Adgar
-       engine. Also basic html tools for
-       creating the grid screen 
+% note edit 12
 ```
+
+And then thanks to the Kary Frameworks's text box implementation, the pervious note can be loaded into the input box as:
+
+![](http://kary.us/GitHubWideImages/note/edit.png) 
+
+
 
 <br><br>
 
@@ -100,34 +82,26 @@ Pouyas-MacBook-Pro:~ pmk$ note
 First of all you'll need to make an empty text file and name it whatever you want and save it in whatever form you want. In a UNIX system I would recommend perpending the name with a dot so the file goes hidden. Now for example the path to our file is 
 
 ```
-/Users/pmk/something/.notes
+~/.notes
 ```
 
+This file is going to contain your notes so if you place it under your dropbox folder for example you'll get dropbox sync as well!
+
+<br/>
 #### Step 2
-Now open up the solution file of the project and in the `program.cs` file find this line:
-
-```C#
-static string note_file_address = "/Users/pmk/Dropbox/.notes";
-```
-
-As you see placing the file in a folder that is being synced with Internet makes you able to have something like Evernote!
-
-The line must be `24` or somewhere near that. Change it to the path of your file:
+Create a text file with this address:
 
 ```
-static string note_file_address = "/Users/pmk/something/.notes";
+~/.notepath
 ```
+And write the address of your storage file in it. In our previous file we used `~/.notes` so let's use that (remember just the address no spacing of any kind - `tab`, `space`, `new line` - after it and before it)
 
-**NOTE: ** Remember that you'll need [Panther Framework](https://github.com/karysystems/panther).
-
+<br/>
 #### Step 3
 
-Now build the note and copy the path of your binary like this:
+Download the note's release package from [Note's Release Page](https://github.com/pmkary/note/releases) (a zip file containing `Note.exe` and `Kary.Foundation.dll`), exact it and copy them together to whatever you want
 
-```
-/somewhere/note/note/bin/release/Note.exe
-```
-
+<br/>
 #### Step 4
 Most of our job is done, We only need to make a shortcut for it. If you're using a good base like Linux you can simply edit the `.bashrc` file and add and alias to the binary but using this way you can do it anywhere including OS X and all UNIX based systems supporting 
 
@@ -140,7 +114,7 @@ string ArcadeCommand = "<ReplaceWithThePathOfYourArcadeDirectoryAndAddress>";
 With this:
 
 ```C#
-string ArcadeCommand = "mono '/Users/pmk/somewhere/note/note/bin/release/Note.exe'";
+string ArcadeCommand = "mono '<where-you-copied-your-files>'";
 ```
 
 **NOTE : ** Remember that the string must be `mono ' + the path of your file + '` like the example in the top
@@ -159,8 +133,9 @@ sudo mv ./note /bin
 
 Or the local bin (whatever...)
 
-Step 5
-You're all done!
+<br />
+#### Step 5
+You're all done! run `% note add` and have your first note!
 
 <br><br>
 
