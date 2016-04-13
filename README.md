@@ -5,7 +5,7 @@
 
 I have always hated every single note / reminder / whatever application that was around. After writing the [Kary Framework](https://github.com/karyfoundation/framework-base), I started creating a very simple and pretty note software so that I could use for real. This is the result. 
 
-## What is special about note?
+## What's special about note?
 
 - Super easy to work with
 - Very minimal
