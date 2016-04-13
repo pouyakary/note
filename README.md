@@ -143,7 +143,7 @@ You're all done! run `% note add` and have your first note!
 
 ```
 Note - Super minimal terminal note app
-Copyright (c) 2015 Pouya Kary <k@arendelle.org>
+Copyright (c) 2015-2016 Pouya Kary <k@arendelle.org>
 
 
 This program is free software: you can redistribute it and/or modify
