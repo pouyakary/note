@@ -1,19 +1,8 @@
 ﻿<Properties StartupItem="Note/Note.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workbench ActiveDocument="Note/Program.cs">
     <Files>
-      <File FileName="Note/Program.cs" Line="13" Column="12" />
+      <File FileName="Note/Program.cs" Line="504" Column="62" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Note" expanded="True">
-            <Node name="Note" expanded="True">
-              <Node name="References" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
