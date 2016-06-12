@@ -1,2 +1,4 @@
 *.exe
-
+Note/bin/*
+Note/bin/Debug/*
+Note/obj/*
