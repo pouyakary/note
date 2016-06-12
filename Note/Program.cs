@@ -1,5 +1,4 @@
-﻿
-//
+﻿//
 //  Program.cs
 //
 //  Created by Pouya Kary on 2015/4/13
@@ -254,6 +253,20 @@ namespace Note
 					   split_location--;
 				   }
 			}
+
+			public static string RandomNoNotesMessage( ) {
+				string[ ] messages = { 
+					"With no notes, it's so boring down here...",
+					"I'm not sure if it's good or bad... you have no notes...",
+					"My job as a note app is at risk with no notes...",
+					"I have to feed a family, please land me some notes",
+					"Economy has changed, people don't give damn about notes",
+					"You must have a good memory to have no notes",
+					"No notes? Jeez what a mess..."
+				};
+				Random rnd = new Random( );
+				return messages[ rnd.Next( messages.Length ) ];
+			}
 			
 		//
 		// ─── PRINT NOTES ────────────────────────────────────────────────────────────────────────────────────
@@ -265,7 +278,7 @@ namespace Note
 
 					Terminal.PrintLn( 
 						Utilities.Perpend(
-							TextShapes.Box( "No notes found..." , 30, 2, 0, TextJustification.Center ) + "\n",
+							TextShapes.Box( RandomNoNotesMessage( ) , Terminal.Width - 12, 2, 0, TextJustification.Center ) + "\n",
 							"   "
 						)
 					);
