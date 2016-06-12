@@ -260,7 +260,7 @@ namespace Note
 					"I'm not sure if it's good or bad... you have no notes...",
 					"My job as a note app is at risk with no notes...",
 					"I have to feed a family, please land me some notes",
-					"Economy has changed, people don't give damn about notes",
+					"Economy has changed, people don't give a damn about notes",
 					"You must have a good memory to have no notes",
 					"No notes? Jeez what a mess..."
 				};
@@ -278,7 +278,7 @@ namespace Note
 
 					Terminal.PrintLn( 
 						Utilities.Perpend(
-							TextShapes.Box( RandomNoNotesMessage( ) , Terminal.Width - 12, 2, 0, TextJustification.Center ) + "\n",
+							TextShapes.Box( RandomNoNotesMessage( ).ToUpper( ) , Terminal.Width - 12, 2, 0, TextJustification.Center ) + "\n",
 							"   "
 						)
 					);
