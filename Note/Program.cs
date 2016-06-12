@@ -23,7 +23,7 @@ namespace Note
 		//
 		
 			static string note_file_address;
-			static readonly string note_file_address_config_file = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.Personal ), ".notepath" );
+			static readonly string note_file_address_config_file = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.Personal ), ".kary-note-path" );
 			static readonly string astrisk_with_space = " ✣ ";
 			static readonly int _column_size = ( Terminal.Width - 17 ) / 2;
 			static readonly int _left_margin = 3;
@@ -39,7 +39,7 @@ namespace Note
 					}
 					return true;
 				} catch {
-					Report( "Could not load the config file." );
+					Report( "Could not load the config file.");
 					return false;
 				}
 			}
@@ -87,7 +87,14 @@ namespace Note
 		//
 		
 			public static string[ ] LoadNotes ( ) {
-				return LoadNoteString( ).Split( '\n' );
+				string[ ] lines = LoadNoteString( ).Split( '\n' );
+				List<string> notes = new List<string> ();
+				foreach ( string line in lines ) {
+					if ( !( line == null || line == "" ) ) {
+						notes.Add( line );
+					}
+				}
+				return notes.ToArray();
 			}
 			
 		//
@@ -253,17 +260,36 @@ namespace Note
 		//
 			
 			public static void printNoteColumn ( string[ ] notes ) {
-				string[ ] column_list = GenerateBoxArray( notes );
-				int split_location = GetColumnSplitLocation( column_list );
-				AdjustSplitLocation( column_list , ref split_location );
+
+				if ( notes.Length == 0 ) {
+
+					Terminal.PrintLn( 
+						Utilities.Perpend(
+							TextShapes.Box( "No notes found..." , 30, 2, 0, TextJustification.Center ) + "\n",
+							"   "
+						)
+					);
 				
-				string left_column = generateStringColumn( column_list , 0 , split_location );
-				string right_column = generateStringColumn( column_list , split_location , column_list.Length );
-				FixColumnSizes( ref left_column , ref right_column );
-				
-				string layout = Utilities.Concatenate ( left_column , right_column );
-				
-				Terminal.Print( layout );
+				} else if ( notes.Length == 1 ) {
+
+					Terminal.PrintLn( GenerateNoteBox( notes[ 0 ] , 1 ) );
+					Terminal.NewLine( );
+
+				} else {
+
+					string[ ] column_list = GenerateBoxArray( notes );
+					int split_location = GetColumnSplitLocation( column_list );
+					AdjustSplitLocation( column_list , ref split_location );
+					
+					string left_column = generateStringColumn( column_list , 0 , split_location );
+					string right_column = generateStringColumn( column_list , split_location , column_list.Length );
+					FixColumnSizes( ref left_column , ref right_column );
+					
+					string layout = Utilities.Concatenate ( left_column , right_column );
+					
+					Terminal.Print( layout );
+
+				}
 			}
 			
 		//
@@ -272,18 +298,14 @@ namespace Note
 
 			public static void PrintNote ( ) {
 				try {
-					using ( var reader = new StreamReader ( note_file_address ) ) {
-						
-						// Defs
-						var lines 	= reader.ReadToEnd ().Split ('\n');
-						
-						// Body
-						print_header( );
-						printNoteColumn( lines );
-						print_footer( );
-					}
-				} catch {
-					Report( "Loading the note file stream failed." );
+					// Defs
+					var lines = LoadNotes();
+					// Body
+					print_header( );
+					printNoteColumn( lines );
+					print_footer( );
+				} catch (Exception e ) {
+					Report( "Loading the note file stream failed.");
 				}
 			}
 			
@@ -515,8 +537,7 @@ namespace Note
 				Terminal.Red( );
 				Terminal.PrintLn( "  O P E R A T I O N   F A I L I U R E\n" );
 				Terminal.Reset( );
-				string msg = Justify.Left( message , 50 );
-				msg = Utilities.Perpend( msg , "  │ " );
+				string msg = Utilities.Perpend( Justify.Left( message , 50 ) , "  │ " );
 				Terminal.PrintLn( msg );
 				Terminal.NewLine( ); 
 			}
