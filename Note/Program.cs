@@ -101,6 +101,9 @@ namespace Note
 		//
 		
 			public static string GenerateNoteBox ( string note , int index ) {
+
+				// format note
+				note = note.Replace("-->", "→").Replace("->", "→");
 				
 				// init commands 
 				string index_string = index.ToString( ); //Kary.Text.Numerics.Roman( index );
