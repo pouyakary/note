@@ -443,7 +443,7 @@
 					try {
 						using( StreamWriter writer = new StreamWriter ( note_file_address ) ) {
 							foreach ( string note in noteList )
-								writer.WriteLine( note );
+								writer.WriteLine( note + "\n\n" );
 						}
 					} catch {
 						Report( "Could not store the notes..." );
@@ -502,7 +502,7 @@
 
 
                                 if ( is_not_to_be_removed )
-                                    writer.WriteLine( element );
+                                    writer.WriteLine( element + "\n" );
                             }
                         }
                     }
@@ -550,7 +550,7 @@
 
 							try {
 								using ( var writer = new StreamWriter ( note_file_address ) ) {
-									writer.Write ( note_file_string + "\n" + new_note_text );
+									writer.Write ( note_file_string + "\n\n" + new_note_text );
 								}
 							} catch  {
 								Report ( "Writing to the note stream failed." );
